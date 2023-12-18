@@ -17,6 +17,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const options = { customCssUrl: '/public/swagger-ui.css', customSiteTitle: "The Words That I Know API - Swagger" };
+
+
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(swaggerDocument,options));
+
 app.get('/', async(req, res) => {
     res.send("Hello World");
 
